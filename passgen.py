@@ -137,6 +137,6 @@ limit the maximum occurrences of single characters to 1.
         print("An error occurred: {0}".format(error))
     else:
         # output password
-        print("==== Your Oassword is ... ====")
+        print("==== Your password is ... ====")
         print(make_password(results.blacklist, results.flags, results.length, results.limit))
         print("==============================")
