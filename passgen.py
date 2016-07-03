@@ -14,6 +14,7 @@
 #
 ############################################################################
 
+
 import sys
 import math
 import random
@@ -89,7 +90,7 @@ limit the maximum occurrences of single characters to 1.
         count = 4
         for i in ["d", "l", "p", "s"]:
             if i not in results.flags:
-                count -=1
+                count -= 1
         if count < 1:
             raise ValueError("No valid flags given!")
         if results.limit < 1 or results.limit > results.length:
