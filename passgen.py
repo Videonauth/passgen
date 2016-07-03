@@ -41,6 +41,7 @@
 #               Provided blacklist for blacklisting characters
 #       - 03.07.2016 <--> 0.00.04
 #               Fixed help output
+#               Fixed errors in help description
 #
 ############################################################################
 
