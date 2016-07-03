@@ -17,6 +17,6 @@ Optional arguments:
 -f FLAGS, --flags FLAGS                 which characters to include into the character pool
 -e LENGTH, --length LENGTH              the length of the generated password
 -i LIMIT, --limit LIMIT                 how often a single character can occur in the password
--b BLACKLIST, --blacklist BLACKLIST     the charactes to be excluded from password generation
+-b BLACKLIST, --blacklist BLACKLIST     the characters to be excluded from password generation
 -v, --version                           program's version number and exit
 ```
