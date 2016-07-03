@@ -1,0 +1,5 @@
+# Virtual environments
+venv/
+
+# Configuration files
+.flake8
