@@ -13,42 +13,6 @@
 # Written for: Python 3.5.1
 #
 ############################################################################
-#
-# Copyright: Videonauth , 2016
-#
-#     Permission to use, copy, modify, and distribute this software is
-#     hereby granted without fee, provided that the copyright notice above
-#     and this permission statement appears in all copies.
-#
-#     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-#     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-#     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-#     NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-#     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-#     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-#     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-#     OTHER DEALINGS IN THE SOFTWARE.
-#
-############################################################################
-#
-#    Changelog:
-#       - 30.06.2016 <--> 0.0.01
-#               Initial script release
-#       - 01.07.2016 <--> 0.0.02
-#               Fixing bugs and documentation
-#       - 03.07.2016 <--> 0.00.03
-#               Added argument parser
-#               Provided blacklist for blacklisting characters
-#       - 03.07.2016 <--> 0.00.04
-#               Fixed help output
-#               Fixed errors in help description
-#       - 03.07.2016 <--> 0.00.05
-#               Removed the restriction to python 3.5
-#               Added restriction to python 3
-#               Added input sanitizing routine
-#               Fixed typo
-#
-############################################################################
 
 import sys
 import math
