@@ -36,38 +36,75 @@
 #                Initial script release
 #        - 01.07.2016 <--> 0.0.02
 #                Fixing bugs and documentation
+#       - 03.07.2016 <--> 0.00.03
+#               Added argument parser
+#               Provided blacklist for blacklisting characters
 #
 ############################################################################
 
 import sys
 import math
 import random
+import argparse
 from string import digits, ascii_letters, punctuation
 
-# defining the characters which are valid for making a password
-charset = digits + ascii_letters + punctuation + " "
 
-
-def make_password(char_num=8, char_limit=1):
+def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
     """
     creating a password of a given length randomizing characters contained in charset variable.
 
+    :param blacklist: blacklisted characters which will not being used for a password
+    :param flags: a string containing the settings for the character pool
     :param char_num: integer value defining the length of the password
     :param char_limit: integer value defining the max occurrences of a single character in the end result
     :return: a string containing the password
     """
+    # defining the characters which are valid for making a password
+    charset = ""
+    if "d" in flags:
+        charset += digits
+    if "l" in flags:
+        charset += ascii_letters
+    if "p" in flags:
+        charset += punctuation
+    if "s" in flags:
+        charset += " "
     # preventing an infinite loop
     if char_num > len(charset) * char_limit:
         char_limit = math.ceil(char_num / len(charset))
     # putting the password together
     return_value = []
+    password = ""
     while len(return_value) < char_num:
         tmp_char = random.choice(charset)
-        if return_value.count(tmp_char) < char_limit:
+        if return_value.count(tmp_char) < char_limit and tmp_char not in blacklist:
             return_value.append(tmp_char)
-    return "".join(return_value)
+    return password.join(return_value)
 
 
 if __name__ == "__main__":
-    argv = [int(i) for i in sys.argv[1:3]]
-    print(make_password(*argv))
+    parser = argparse.ArgumentParser(
+        prog=sys.argv[0],
+        description="""
+            Generates a password of given length.
+            If no arguments are given the program will default to a password length of 8 characters and
+            limit the maximum occurrences of single characters to 1.
+
+                Example:
+                \"passgen.py --flags='dlps' --length=15 --limit=1\" will result in a password containing digits(d),
+                letters(l), punctuation(p) and space(s) character being 15 characters long and having each character
+                maximal occur once.
+                \"passgen.py -f 'dlps' -e 15 -i 1\" will do the same.
+        """
+    )
+    parser.add_argument("-f", "--flags", action="store", dest="flags", type=str, default="dlps",
+                        help="Defining which characters to include into the character pool")
+    parser.add_argument("-e", "--length", action="store", dest="length", type=int, default=8,
+                        help="Defining the length of the generated password")
+    parser.add_argument("-i", "--limit", action="store", dest="limit", type=int, default=1,
+                        help="Defining how often a single character can occur in the password")
+    parser.add_argument("-b", "--blacklist", action="store", dest="blacklist", type=str, default="",
+                        help="Defining the charactes to be excluded from password generation")
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.03")
+    results = parser.parse_args()
+    print(make_password(results.blacklist, results.flags, results.length, results.limit))
