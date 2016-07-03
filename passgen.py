@@ -94,10 +94,10 @@ If no arguments are given the program will default to a password length of 8 cha
 limit the maximum occurrences of single characters to 1.
 
     Example:
-    \"passgen.py --flags 'dlps' --length 15 --limit 1\" will result in a password containing digits(d),
+    \"passgen.py --flags dlps --length 15 --limit 1\" will result in a password containing digits(d),
     letters(l), punctuation(p) and space(s) character being 15 characters long and having each character
     maximal occur once.
-    \"passgen.py -f 'dlps' -e 15 -i 1\" will do the same.
+    \"passgen.py -f dlps -e 15 -i 1\" will do the same.
         """,
         formatter_class=argparse.RawTextHelpFormatter
     )
