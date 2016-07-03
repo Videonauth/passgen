@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 ############################################################################
 #
@@ -42,6 +42,11 @@
 #       - 03.07.2016 <--> 0.00.04
 #               Fixed help output
 #               Fixed errors in help description
+#       - 03.07.2016 <--> 0.00.05
+#               Removed the restriction to python 3.5
+#               Added restriction to python 3
+#               Added input sanitizing routine
+#               Fixed typo
 #
 ############################################################################
 
@@ -86,6 +91,7 @@ def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
 
 
 if __name__ == "__main__":
+    # declare the help text and variables
     parser = argparse.ArgumentParser(
         prog=sys.argv[0],
         description="""
@@ -108,7 +114,29 @@ limit the maximum occurrences of single characters to 1.
     parser.add_argument("-i", "--limit", action="store", dest="limit", type=int, default=1,
                         help="defining how often a single character can occur in the password")
     parser.add_argument("-b", "--blacklist", action="store", dest="blacklist", type=str, default="",
-                        help="defining the charactes to be excluded from password generation")
+                        help="defining the characters to be excluded from password generation")
     parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.04")
     results = parser.parse_args()
-    print(make_password(results.blacklist, results.flags, results.length, results.limit))
+    # sanitize input
+    try:
+        for i in results.flags:
+            if results.flags.count(i) > 1:
+                raise ValueError("Flags can occur only once in the statement!")
+        count = 4
+        for i in ["d", "l", "p", "s"]:
+            if i not in results.flags:
+                count -=1
+        if count < 1:
+            raise ValueError("No valid flags given!")
+        if results.limit < 1 or results.limit > results.length:
+            raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
+        if results.length < 8:
+            results.length = 8
+            print("For your own safety the password has been set to be at least 8 characters long!")
+    except ValueError as error:
+        print("An error occurred: {0}".format(error))
+    else:
+        # output password
+        print("==== Your Oassword is ... ====")
+        print(make_password(results.blacklist, results.flags, results.length, results.limit))
+        print("==============================")
