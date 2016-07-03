@@ -32,13 +32,15 @@
 ############################################################################
 #
 #    Changelog:
-#        - 30.06.2016 <--> 0.0.01
-#                Initial script release
-#        - 01.07.2016 <--> 0.0.02
-#                Fixing bugs and documentation
+#       - 30.06.2016 <--> 0.0.01
+#               Initial script release
+#       - 01.07.2016 <--> 0.0.02
+#               Fixing bugs and documentation
 #       - 03.07.2016 <--> 0.00.03
 #               Added argument parser
 #               Provided blacklist for blacklisting characters
+#       - 03.07.2016 <--> 0.00.04
+#               Fixed help output
 #
 ############################################################################
 
@@ -86,25 +88,26 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog=sys.argv[0],
         description="""
-            Generates a password of given length.
-            If no arguments are given the program will default to a password length of 8 characters and
-            limit the maximum occurrences of single characters to 1.
+Generates a password of given length.
+If no arguments are given the program will default to a password length of 8 characters and
+limit the maximum occurrences of single characters to 1.
 
-                Example:
-                \"passgen.py --flags='dlps' --length=15 --limit=1\" will result in a password containing digits(d),
-                letters(l), punctuation(p) and space(s) character being 15 characters long and having each character
-                maximal occur once.
-                \"passgen.py -f 'dlps' -e 15 -i 1\" will do the same.
-        """
+    Example:
+    \"passgen.py --flags='dlps' --length=15 --limit=1\" will result in a password containing digits(d),
+    letters(l), punctuation(p) and space(s) character being 15 characters long and having each character
+    maximal occur once.
+    \"passgen.py -f 'dlps' -e 15 -i 1\" will do the same.
+        """,
+        formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument("-f", "--flags", action="store", dest="flags", type=str, default="dlps",
-                        help="Defining which characters to include into the character pool")
+                        help="defining which characters to include into the character pool")
     parser.add_argument("-e", "--length", action="store", dest="length", type=int, default=8,
-                        help="Defining the length of the generated password")
+                        help="defining the length of the generated password")
     parser.add_argument("-i", "--limit", action="store", dest="limit", type=int, default=1,
-                        help="Defining how often a single character can occur in the password")
+                        help="defining how often a single character can occur in the password")
     parser.add_argument("-b", "--blacklist", action="store", dest="blacklist", type=str, default="",
-                        help="Defining the charactes to be excluded from password generation")
-    parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.03")
+                        help="defining the charactes to be excluded from password generation")
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.04")
     results = parser.parse_args()
     print(make_password(results.blacklist, results.flags, results.length, results.limit))
