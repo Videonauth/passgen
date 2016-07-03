@@ -45,11 +45,11 @@
 #
 ############################################################################
 
-import sys
+import argparse
 import math
 import random
-import argparse
 from string import digits, ascii_letters, punctuation
+import sys
 
 
 def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
