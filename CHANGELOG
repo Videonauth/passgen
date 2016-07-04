@@ -1,15 +1,15 @@
  Changelog:
-    - 30.06.2016 <--> 0.0.01
+    - 30.06.2016 <--> 0.0.1
             Initial script release
-    - 01.07.2016 <--> 0.0.02
+    - 01.07.2016 <--> 0.0.2
             Fixing bugs and documentation
-    - 03.07.2016 <--> 0.00.03
+    - 03.07.2016 <--> 0.0.3
             Added argument parser
             Provided blacklist for blacklisting characters
-    - 03.07.2016 <--> 0.00.04
+    - 03.07.2016 <--> 0.0.4
             Fixed help output
             Fixed errors in help description
-    - 03.07.2016 <--> 0.00.05 (WIP)
+    - 03.07.2016 <--> 0.0.5
             Removed the restriction to python 3.5
             Added restriction to python 3
             Added input sanitizing routine
@@ -25,3 +25,6 @@
             Pass unpacked vars dictionary to make_password()
             Remove unused sys import
             Merge branch 'master' into develop
+    - 04.07.2016 <--> 0.0.6 (WIP)
+            Changed version numbering to be Semantic Versioning 2.0.0 compatible
+                Reference: http://semver.org/#spec-item-2
