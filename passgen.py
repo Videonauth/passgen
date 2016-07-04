@@ -63,20 +63,16 @@ def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
     :param char_limit: integer value defining the max occurrences of a single character in the end result
     :return: a string containing the password
     """
-    # defining the characters which are valid for making a password
-    charset = ""
-    if "d" in flags:
-        charset += digits
-    if "l" in flags:
-        charset += ascii_letters
-    if "p" in flags:
-        charset += punctuation
-    if "s" in flags:
-        charset += " "
-    # preventing an infinite loop
-    if char_num > len(charset) * char_limit:
-        char_limit = math.ceil(char_num / len(charset))
-    # putting the password together
+
+    # Define the characters which are valid for making a password
+    char_all = {'d': digits, 'l': ascii_letters, 'p': punctuation, 's': ' '}
+    char_set = ""
+    for flag in flags:
+        char_set += char_all[flag]
+    # Prevent infinite loop
+    if length > len(char_set) * limit:
+        limit = math.ceil(length / len(char_set))
+    # Put the password together
     return_value = []
     password = ""
     while len(return_value) < char_num:
