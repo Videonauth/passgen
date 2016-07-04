@@ -30,7 +30,6 @@ def make_password(blacklist="", flags="dlps", length=8, limit=1):
     :param limit: integer value defining the max occurrences of a single character in the end result
     :return: a string containing the password
     """
-
     # Define the characters which are valid for making a password
     char_all = {'d': digits, 'l': ascii_letters, 'p': punctuation, 's': ' '}
     char_set = ""
