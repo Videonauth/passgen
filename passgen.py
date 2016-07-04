@@ -105,4 +105,4 @@ if __name__ == "__main__":
                         help="the characters to be excluded from password generation")
     parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.04")
     results = parser.parse_args()
-    print(make_password(results.blacklist, results.flags, results.length, results.limit))
+    print(make_password(**vars(results)))
