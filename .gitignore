@@ -3,3 +3,6 @@ venv/
 
 # Configuration files
 .flake8
+.idea/
+NOTES
+__init__.py
