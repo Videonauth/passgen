@@ -49,6 +49,7 @@ def make_password(blacklist="", flags="dlps", length=8, limit=1):
             return_value.append(tmp_char)
     return password.join(return_value)
 
+
 if __name__ == "__main__":
     # declare the help text and variables
     parser = argparse.ArgumentParser(
