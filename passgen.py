@@ -35,7 +35,8 @@ def make_password(blacklist="", flags="dlps", length=8, limit=1):
     char_all = {'d': digits, 'l': ascii_letters, 'p': punctuation, 's': ' '}
     char_set = ""
     for flag in flags:
-        char_set += char_all[flag]
+        if flag in char_all:
+            char_set += char_all[flag]
     # Prevent infinite loop
     if length > len(char_set) * limit:
         limit = math.ceil(length / len(char_set))
