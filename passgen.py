@@ -53,14 +53,13 @@ import sys
 import textwrap
 
 
-def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
-    """
-    creating a password of a given length randomizing characters contained in charset variable.
+def make_password(blacklist="", flags="dlps", length=8, limit=1):
+    """Make a password of a given length randomizing characters contained in char_set variable.
 
-    :param blacklist: blacklisted characters which will not being used for a password
+    :param blacklist: blacklisted characters which are not used for password
     :param flags: a string containing the settings for the character pool
-    :param char_num: integer value defining the length of the password
-    :param char_limit: integer value defining the max occurrences of a single character in the end result
+    :param length: integer value defining the length of the password
+    :param limit: integer value defining the max occurrences of a single character in the end result
     :return: a string containing the password
     """
 
@@ -75,12 +74,11 @@ def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
     # Put the password together
     return_value = []
     password = ""
-    while len(return_value) < char_num:
-        tmp_char = random.choice(charset)
-        if return_value.count(tmp_char) < char_limit and tmp_char not in blacklist:
+    while len(return_value) < length:
+        tmp_char = random.choice(char_set)
+        if return_value.count(tmp_char) < limit and tmp_char not in blacklist:
             return_value.append(tmp_char)
     return password.join(return_value)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
