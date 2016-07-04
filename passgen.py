@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 ############################################################################
 #
@@ -11,37 +11,6 @@
 # Purpose:
 #     Generate a randomized password of given length.
 # Written for: Python 3.5.1
-#
-############################################################################
-#
-# Copyright: Videonauth , 2016
-#
-#     Permission to use, copy, modify, and distribute this software is
-#     hereby granted without fee, provided that the copyright notice above
-#     and this permission statement appears in all copies.
-#
-#     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-#     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-#     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-#     NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-#     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-#     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-#     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-#     OTHER DEALINGS IN THE SOFTWARE.
-#
-############################################################################
-#
-#    Changelog:
-#       - 30.06.2016 <--> 0.0.01
-#               Initial script release
-#       - 01.07.2016 <--> 0.0.02
-#               Fixing bugs and documentation
-#       - 03.07.2016 <--> 0.00.03
-#               Added argument parser
-#               Provided blacklist for blacklisting characters
-#       - 03.07.2016 <--> 0.00.04
-#               Fixed help output
-#               Fixed errors in help description
 #
 ############################################################################
 
@@ -80,6 +49,7 @@ def make_password(blacklist="", flags="dlps", length=8, limit=1):
     return password.join(return_value)
 
 if __name__ == "__main__":
+    # declare the help text and variables
     parser = argparse.ArgumentParser(
         description=textwrap.dedent("""\
             Generate a password of given length.
@@ -104,4 +74,26 @@ if __name__ == "__main__":
                         help="the characters to be excluded from password generation")
     parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.04")
     results = parser.parse_args()
-    print(make_password(**vars(results)))
+    # Sanitize input
+    try:
+        for i in results.flags:
+            if results.flags.count(i) > 1:
+                raise ValueError("Flags can occur only once in the statement!")
+        count = 4
+        for i in ["d", "l", "p", "s"]:
+            if i not in results.flags:
+                count -= 1
+        if count < 1:
+            raise ValueError("No valid flags given!")
+        if results.limit < 1 or results.limit > results.length:
+            raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
+        if results.length < 8:
+            results.length = 8
+            print("For your own safety, the password has been set to be at least 8 characters long!")
+    except ValueError as error:
+        print("An error occurred: {0}".format(error))
+    else:
+        # Output password
+        print("==== Your password is ... ====")
+        print(make_password(**vars(results)))
+        print("==============================")

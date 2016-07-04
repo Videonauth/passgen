@@ -1,0 +1,17 @@
+ Changelog:
+    - 30.06.2016 <--> 0.0.01
+            Initial script release
+    - 01.07.2016 <--> 0.0.02
+            Fixing bugs and documentation
+    - 03.07.2016 <--> 0.00.03
+            Added argument parser
+            Provided blacklist for blacklisting characters
+    - 03.07.2016 <--> 0.00.04
+            Fixed help output
+            Fixed errors in help description
+    - 03.07.2016 <--> 0.00.05 (WIP)
+            Removed the restriction to python 3.5
+            Added restriction to python 3
+            Added input sanitizing routine
+            Fixed typo
+            Removed license and changelog from code
