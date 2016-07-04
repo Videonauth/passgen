@@ -92,7 +92,7 @@ if __name__ == "__main__":
             results.length = 8
             print("For your own safety, the password has been set to be at least 8 characters long!")
     except ValueError as error:
-        print("An error occurred: {0}".format(error))
+        print("An error occurred: {}".format(error))
     else:
         # Output password
         print("==== Your password is ... ====")
