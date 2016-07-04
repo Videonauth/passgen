@@ -50,6 +50,7 @@ import math
 import random
 from string import digits, ascii_letters, punctuation
 import sys
+import textwrap
 
 
 def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
@@ -87,19 +88,18 @@ def make_password(blacklist="", flags="dlps", char_num=8, char_limit=1):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        prog=sys.argv[0],
-        description="""
-Generates a password of given length.
-If no arguments are given the program will default to a password length of 8 characters and
-limit the maximum occurrences of single characters to 1.
+        description=textwrap.dedent("""\
+            Generate a password of given length.
+            If no arguments are given, the program will default to a password length of 8 characters and
+            limit the maximum occurrences of single characters to 1.
 
-    Example:
-    \"passgen.py --flags dlps --length 15 --limit 1\" will result in a password containing digits(d),
-    letters(l), punctuation(p) and space(s) character being 15 characters long and having each character
-    maximal occur once.
-    \"passgen.py -f dlps -e 15 -i 1\" will do the same.
-        """,
-        formatter_class=argparse.RawTextHelpFormatter
+            Example:
+            "passgen.py --flags dlps --length 15 --limit 1" will result in a password containing digits (`d`),
+            letters (`l`), punctuation (`p`) and space (`s`) character being 15 characters long and
+            having each character maximally occur once.
+            "passgen.py -f dlps -e 15 -i 1" will do the same.
+            """),
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("-f", "--flags", action="store", dest="flags", type=str, default="dlps",
                         help="defining which characters to include into the character pool")
