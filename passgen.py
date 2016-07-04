@@ -95,14 +95,14 @@ if __name__ == "__main__":
             """),
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument("-f", "--flags", action="store", dest="flags", type=str, default="dlps",
-                        help="defining which characters to include into the character pool")
-    parser.add_argument("-e", "--length", action="store", dest="length", type=int, default=8,
-                        help="defining the length of the generated password")
-    parser.add_argument("-i", "--limit", action="store", dest="limit", type=int, default=1,
-                        help="defining how often a single character can occur in the password")
-    parser.add_argument("-b", "--blacklist", action="store", dest="blacklist", type=str, default="",
-                        help="defining the charactes to be excluded from password generation")
+    parser.add_argument("-f", "--flags", type=str, default="dlps",
+                        help="which characters to include into the character pool")
+    parser.add_argument("-e", "--length", type=int, default=8,
+                        help="the length of the generated password")
+    parser.add_argument("-i", "--limit", type=int, default=1,
+                        help="how often a single character can occur in the password")
+    parser.add_argument("-b", "--blacklist", type=str, default="",
+                        help="the characters to be excluded from password generation")
     parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.04")
     results = parser.parse_args()
     print(make_password(results.blacklist, results.flags, results.length, results.limit))
