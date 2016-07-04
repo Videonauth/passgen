@@ -31,3 +31,4 @@
             Reworked the script to pass the namespace around
             Changed version output of the argument parser to reflect the new branch
             Created module docstring to make linter8 happy
+            Added flag to differ between uppercase and lowercase letters

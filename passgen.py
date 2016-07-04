@@ -22,7 +22,7 @@
 import argparse
 import math
 import random
-from string import digits, ascii_letters, punctuation
+from string import digits, ascii_lowercase, ascii_uppercase, punctuation
 import textwrap
 
 
@@ -39,7 +39,7 @@ def sanitize_input(dictionary):
                 raise ValueError("Flags can occur only once in the statement!")
         # preventing that the program runs with no valid flags given
         count = 4
-        for flag in ["d", "l", "p", "s"]:
+        for flag in ["d", "l", "u", "p", "s"]:
             if flag not in dictionary.flags:
                 count -= 1
         if count < 1:
@@ -47,7 +47,7 @@ def sanitize_input(dictionary):
         # throwing away any incorrect flag
         tmp_flag = ""
         for flag in dictionary.flags:
-            if flag in ["d", "l", "p", "s"]:
+            if flag in ["d", "l", "u", "p", "s"]:
                 tmp_flag += flag
         dictionary.flags = tmp_flag
         # preventing incorrect values for limit
@@ -76,7 +76,7 @@ def make_password(dictionary):
     """
 
     # Define the characters which are valid for making a password
-    char_all = {'d': digits, 'l': ascii_letters, 'p': punctuation, 's': ' '}
+    char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
     char_set = ""
     for flag in dictionary.flags:
             char_set += char_all[flag]
@@ -103,13 +103,13 @@ if __name__ == "__main__":
 
             Example:
             "passgen.py --flags dlps --length 15 --limit 1" will result in a password containing digits (`d`),
-            letters (`l`), punctuation (`p`) and space (`s`) character being 15 characters long and
-            having each character maximally occur once.
+            lowercase letters (`l`), uppercase letters (`u`) punctuation (`p`) and space (`s`) character 
+            being 15 characters long and having each character maximally occur once.
             "passgen.py -f dlps -e 15 -i 1" will do the same.
             """),
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument("-f", "--flags", type=str, default="dlps",
+    parser.add_argument("-f", "--flags", type=str, default="dlups",
                         help="which characters to include into the character pool")
     parser.add_argument("-e", "--length", type=int, default=8,
                         help="the length of the generated password")
