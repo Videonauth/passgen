@@ -15,3 +15,13 @@
             Added input sanitizing routine
             Fixed typo
             Removed license and changelog from code
+            Remove unnecessary quotes
+            Arrange imports in alphabetical order to make Flake8 linter happy
+            Add .gitignore
+            Use textwrap.dedent() to dedent description
+            Remove if statements
+            Rename char_num to length and char_limit to limit
+            Remove unnecessary keyword arguments
+            Pass unpacked vars dictionary to make_password()
+            Remove unused sys import
+            Merge branch 'master' into develop
