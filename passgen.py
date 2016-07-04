@@ -15,6 +15,10 @@
 ############################################################################
 
 
+"""Module/Script to generate randomized passwords.
+"""
+
+
 import argparse
 import math
 import random
@@ -23,7 +27,7 @@ import textwrap
 
 
 def sanitize_input(dictionary):
-    """Sanitizes the input for the make_password function
+    """Sanitizes the input for the make_password function.
 
     :param dictionary: contains a namespace of the users or others programs input
     :return: a sanitized namespace or in case of malicious input stops the program
@@ -113,7 +117,7 @@ if __name__ == "__main__":
                         help="how often a single character can occur in the password")
     parser.add_argument("-b", "--blacklist", type=str, default="",
                         help="the characters to be excluded from password generation")
-    parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.00.04")
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.6")
     # Output password
     print("==== Your password is ... ====")
     print(make_password(sanitize_input(parser.parse_args())))
