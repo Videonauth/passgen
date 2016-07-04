@@ -50,7 +50,7 @@ def make_password(blacklist="", flags="dlps", length=8, limit=1):
 
 
 if __name__ == "__main__":
-    # declare the help text and variables
+    # Declare the help text and variables
     parser = argparse.ArgumentParser(
         description=textwrap.dedent("""\
             Generate a password of given length.
