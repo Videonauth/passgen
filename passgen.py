@@ -77,8 +77,8 @@ def make_password(dictionary):
     for flag in dictionary.flags:
             char_set += char_all[flag]
     # Prevent infinite loop
-    if dictionary.length > len(char_set) * dictionary.limit:
-        dictionary.limit = math.ceil(dictionary.length / len(char_set))
+    if dictionary.length > (len(char_set) - len(dictionary.blacklist)) * dictionary.limit:
+        dictionary.limit = math.ceil(dictionary.length / (len(char_set) - len(dictionary.blacklist)))
     # Put the password together
     return_value = []
     password = ""
