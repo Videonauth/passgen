@@ -35,7 +35,7 @@ def sanitize_input(dictionary):
             if dictionary.flags.count(flag) > 1:
                 raise ValueError("Flags can occur only once in the statement!")
         # preventing that the program runs with no valid flags given
-        count = 4
+        count = 5
         for flag in ["d", "l", "u", "p", "s"]:
             if flag not in dictionary.flags:
                 count -= 1
