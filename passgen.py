@@ -47,8 +47,8 @@ def sanitize_input(dictionary):
             if flag in ["d", "l", "u", "p", "s"]:
                 tmp_flag += flag
         dictionary.flags = tmp_flag
-        # preventing incorrect values for limit
-        if dictionary.limit < 1 or dictionary.limit > dictionary.length:
+        # Prevent incorrect values for limit
+        if not 1 <= dictionary.limit <= dictionary.length:
             raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
         # Prevent passwords below the length of 8
         if dictionary.length < 8:
