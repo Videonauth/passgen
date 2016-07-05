@@ -20,3 +20,7 @@ Optional arguments:
 -b BLACKLIST, --blacklist BLACKLIST     the characters to be excluded from password generation
 -v, --version                           program's version number and exit
 ```
+
+## Unit testing
+
+To run the unit tests, run either `python3 -m unittest` or `python -m unittest` (e.g. when using a virtual environment for Python 3)
