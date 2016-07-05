@@ -32,3 +32,15 @@
             Changed version output of the argument parser to reflect the new branch
             Created module docstring to make linter8 happy
             Added flag to differ between uppercase and lowercase letters
+            Remove newline to make Flake8 linter happy
+            Capitalize word
+            Omit positional argument specifier
+            Add "u" option to -f flag
+            Update .gitignore
+            Fix typos and style
+            Write conditional statement more compactly
+            Remove redundant positional argument specifier
+            Add "u" flag to example and fix formatting
+            Define a function to make parser for importing by test module
+            Add unit tests
+            Add information about running unit tests
