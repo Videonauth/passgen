@@ -25,6 +25,24 @@
             Pass unpacked vars dictionary to make_password()
             Remove unused sys import
             Merge branch 'master' into develop
-    - 04.07.2016 <--> 0.0.6 (WIP)
-            Changed version numbering to be Semantic Versioning 2.0.0 compatible
+    - 04.07.2016 <--> 0.0.6
+            Changed version numbering to be Semantic Visioning 2.0.0 compatible
                 Reference: http://semver.org/#spec-item-2
+            Reworked the script to pass the namespace around
+            Changed version output of the argument parser to reflect the new branch
+            Created module docstring to make linter8 happy
+            Added flag to differ between uppercase and lowercase letters
+            Remove newline to make Flake8 linter happy
+            Capitalize word
+            Omit positional argument specifier
+            Add "u" option to -f flag
+            Update .gitignore
+            Fix typos and style
+            Write conditional statement more compactly
+            Remove redundant positional argument specifier
+            Add "u" flag to example and fix formatting
+            Define a function to make parser for importing by test module
+            Add unit tests
+            Add information about running unit tests
+            Fixed issue #9
+    - 05.07.2016 <--> 0.0.7 (WIP)

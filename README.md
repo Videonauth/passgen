@@ -6,9 +6,9 @@ Usage:
 Generate a password of given length. If no arguments are given, the program will default to a password length of 8 characters and limit the maximum occurrences of single characters to 1.
 
 Example:
-`passgen.py --flags dlps --length 15 --limit 1` will result in a password containing digits (`d`),
-letters (`l`), punctuation (`p`) and space (`s`) character being 15 characters long and
-having each character maximally occur once. `passgen.py -f dlps -e 15 -i 1` will do the same.
+`passgen.py --flags dlups --length 15 --limit 1` will result in a password containing digits (`d`),
+lowercase letters (`l`), uppercase letters(`u`), punctuation (`p`) and space (`s`) character, being 15 characters long, and
+having each character maximally occur once. `passgen.py -f dlups -e 15 -i 1` will do the same.
 
 Optional arguments:
 
@@ -20,3 +20,7 @@ Optional arguments:
 -b BLACKLIST, --blacklist BLACKLIST     the characters to be excluded from password generation
 -v, --version                           program's version number and exit
 ```
+
+## Unit testing
+
+To run the unit tests, run either `python3 -m unittest` or `python -m unittest` (e.g. when using a virtual environment for Python 3)
