@@ -89,7 +89,8 @@ def make_password(dictionary):
     return password.join(return_value)
 
 
-if __name__ == "__main__":
+def make_parser():
+    """Make parser."""
     # Declare the help text and variables
     parser = argparse.ArgumentParser(
         description=textwrap.dedent("""\
@@ -114,6 +115,10 @@ if __name__ == "__main__":
     parser.add_argument("-b", "--blacklist", type=str, default="",
                         help="the characters to be excluded from password generation")
     parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.6")
+    return parser
+
+if __name__ == "__main__":
+    parser = make_parser()
     # Output password
     print("==== Your password is ... ====")
     print(make_password(sanitize_input(parser.parse_args())))
