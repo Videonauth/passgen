@@ -24,24 +24,24 @@ import textwrap
 
 
 def sanitize_input(dictionary):
-    """Sanitizes the input for the make_password function.
+    """Sanitize the input for the make_password function.
 
-    :param dictionary: contains a namespace of the users or others programs' input
-    :return: a sanitized namespace or in case of malicious input stops the program
+    :param dictionary: contains a namespace of the users' or other programs' input
+    :return: a sanitized namespace or stops the program in case of malicious input
     """
     try:
-        # preventing double flags
+        # Prevent duplicate flags
         for flag in dictionary.flags:
             if dictionary.flags.count(flag) > 1:
                 raise ValueError("Flags can occur only once in the statement!")
-        # preventing that the program runs with no valid flags given
+        # Prevent program from running with no valid flags given
         count = 5
         for flag in ["d", "l", "u", "p", "s"]:
             if flag not in dictionary.flags:
                 count -= 1
         if count < 1:
             raise ValueError("No valid flags given!")
-        # throwing away any incorrect flag
+        # Throw away incorrect flags
         tmp_flag = ""
         for flag in dictionary.flags:
             if flag in ["d", "l", "u", "p", "s"]:
@@ -50,10 +50,10 @@ def sanitize_input(dictionary):
         # preventing incorrect values for limit
         if dictionary.limit < 1 or dictionary.limit > dictionary.length:
             raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
-        # preventing passwords below the length of 8
+        # Prevent passwords below the length of 8
         if dictionary.length < 8:
             dictionary.length = 8
-            print("For your own safety, the password has been set to be at least 8 characters long!")
+            print("For your own safety, the password has been set to be at 8 characters long!")
     except ValueError as error:
         print("An error occurred: {0}".format(error))
         exit()
@@ -68,7 +68,7 @@ def make_password(dictionary):
     :var dictionary.blacklist: blacklisted characters which are not used for password
     :var dictionary.flags: a string containing the settings for the character pool
     :var dictionary.length: integer value defining the length of the password
-    :var dictionary.limit: integer value defining the max occurrences of a single character in the end result
+    :var dictionary.limit: integer value defining the maximum occurrences of a single character in the end result
     :return: a string containing the password
     """
     # Define the characters which are valid for making a password
