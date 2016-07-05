@@ -26,5 +26,9 @@
             Remove unused sys import
             Merge branch 'master' into develop
     - 04.07.2016 <--> 0.0.6 (WIP)
-            Changed version numbering to be Semantic Versioning 2.0.0 compatible
+            Changed version numbering to be Semantic Visioning 2.0.0 compatible
                 Reference: http://semver.org/#spec-item-2
+            Reworked the script to pass the namespace around
+            Changed version output of the argument parser to reflect the new branch
+            Created module docstring to make linter8 happy
+            Added flag to differ between uppercase and lowercase letters
