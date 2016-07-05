@@ -25,7 +25,7 @@
             Pass unpacked vars dictionary to make_password()
             Remove unused sys import
             Merge branch 'master' into develop
-    - 04.07.2016 <--> 0.0.6 (WIP)
+    - 04.07.2016 <--> 0.0.6
             Changed version numbering to be Semantic Visioning 2.0.0 compatible
                 Reference: http://semver.org/#spec-item-2
             Reworked the script to pass the namespace around
@@ -45,3 +45,4 @@
             Add unit tests
             Add information about running unit tests
             Fixed issue #9
+    - 05.07.2016 <--> 0.0.7 (WIP)
