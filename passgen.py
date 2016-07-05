@@ -98,10 +98,10 @@ if __name__ == "__main__":
             limit the maximum occurrences of single characters to 1.
 
             Example:
-            "passgen.py --flags dlps --length 15 --limit 1" will result in a password containing digits (`d`),
-            lowercase letters (`l`), uppercase letters (`u`) punctuation (`p`) and space (`s`) character
-            being 15 characters long and having each character maximally occur once.
-            "passgen.py -f dlps -e 15 -i 1" will do the same.
+            "passgen.py --flags dlups --length 15 --limit 1" will result in a password containing digits ("d"),
+            lowercase letters ("l"), uppercase letters ("u"), punctuation ("p") and space ("s") character,
+            being 15 characters long, and having each character maximally occur once.
+            "passgen.py -f dlups -e 15 -i 1" will do the same.
             """),
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
