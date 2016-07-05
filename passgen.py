@@ -55,8 +55,8 @@ def sanitize_input(dictionary):
             dictionary.length = 8
             print("For your own safety, the password has been set to be at 8 characters long!")
     except ValueError as error:
-        print("An error occurred: {0}".format(error))
-        exit()
+        print("An error occurred: {}".format(error))
+        raise
     else:
         return dictionary
 
