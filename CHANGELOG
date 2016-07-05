@@ -44,3 +44,4 @@
             Define a function to make parser for importing by test module
             Add unit tests
             Add information about running unit tests
+            Fixed issue #9
