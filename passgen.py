@@ -135,9 +135,9 @@ def make_parser():
     return parser
 
 if __name__ == "__main__":
-    parser = make_parser()
+    options = make_parser()
     # Output password
-    password = make_password(sanitize_input(parser.parse_args()))
+    passwd = make_password(sanitize_input(options.parse_args()))
     print("==== Your password is ... ====")
-    print(password)
+    print(passwd)
     print("==============================")
