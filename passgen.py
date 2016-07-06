@@ -17,10 +17,14 @@
 """Module/Script to generate randomized passwords."""
 
 import argparse
+from collections import Counter
 import math
 import random
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 import textwrap
+
+# Define the characters which are valid for making a password
+char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
 
 
 def sanitize_input(dictionary):
@@ -30,30 +34,36 @@ def sanitize_input(dictionary):
     :return: a sanitized namespace or stops the program in case of malicious input
     """
     try:
-        # Prevent duplicate flags
-        for flag in dictionary.flags:
-            if dictionary.flags.count(flag) > 1:
+        c_flags = Counter(dictionary.flags)
+        c_blacklist = Counter(dictionary.blacklist)
+        char_set = ''
+
+        for key, value in c_flags.items():
+            # Prevent duplicate flags
+            if value > 1:
                 raise ValueError("Flags can occur only once in the statement!")
-        # Prevent program from running with no valid flags given
-        count = 5
-        for flag in ["d", "l", "u", "p", "s"]:
-            if flag not in dictionary.flags:
-                count -= 1
-        if count < 1:
-            raise ValueError("No valid flags given!")
-        # Throw away incorrect flags
-        tmp_flag = ""
-        for flag in dictionary.flags:
-            if flag in ["d", "l", "u", "p", "s"]:
-                tmp_flag += flag
-        dictionary.flags = tmp_flag
-        # Prevent incorrect values for limit
-        if not 1 <= dictionary.limit <= dictionary.length:
-            raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
+            # Prevent program from running with no valid flags or a mix of valid and invalid flags
+            if key not in char_all.keys():
+                raise ValueError("Invalid flags given!")
+            char_set += char_all[key]
+
+        for key, value in c_blacklist.items():
+            # Prevent duplicate characters in blacklist
+            if value > 1:
+                raise ValueError('Duplicate characters in blacklist!')
+            # Raise ValueError when character in blacklist does not exist in any of the valid flags
+            if key not in char_set:
+                raise ValueError('Character in blacklist is invalid for flags given!')
+            char_set = char_set.replace(key, '')  # note that assignment is required because strings are immutable
+
         # Prevent passwords below the length of 8
         if dictionary.length < 8:
             dictionary.length = 8
-            print("For your own safety, the password has been set to be at 8 characters long!")
+            print("For your own safety, the password has been set to be 8 characters long!")
+
+        # Prevent incorrect values for limit
+        if not 1 <= dictionary.limit <= dictionary.length:
+            raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
     except ValueError as error:
         print("An error occurred: {}".format(error))
         raise
@@ -71,8 +81,6 @@ def make_password(dictionary):
     :var dictionary.limit: integer value defining the maximum occurrences of a single character in the end result
     :return: a string containing the password
     """
-    # Define the characters which are valid for making a password
-    char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
     char_set = ""
     for flag in dictionary.flags:
             char_set += char_all[flag]
