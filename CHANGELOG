@@ -60,3 +60,6 @@
     - 05.07.2016 <--> 0.0.8 (WIP)
             Added version string to be used.
             Cleaned output.
+            Added header for test_passgen.py
+            Added secondary author to passgen.py
+            Added docstring for test_passgen.py

@@ -1,6 +1,21 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+############################################################################
+#
+# test_passgen.py
+#
+############################################################################
+#
+# Author: edwinksl <>
+# Date: 05.07.2016
+# Purpose:
+#     Testing the argument parser of passgen.py.
+# Written for: Python 3.5.1
+#
+############################################################################
 
-import argparse
+"""Test cases for passgen.py"""
+
 from passgen import make_parser, sanitize_input
 import unittest
 
