@@ -33,5 +33,9 @@ class PassGenTestCase(unittest.TestCase):
             dictionary = sanitize_input(self.parse_args(['-f', valid_flag]))
             self.assertIsInstance(dictionary, argparse.Namespace)
 
+    def test_valid_blacklist(self):
+        dictionary = sanitize_input(self.parse_args(['-f', 'd', '-b', '012345678']))
+        self.assertIsInstance(dictionary, argparse.Namespace)
+
 if __name__ == '__main__':
     unittest.main(buffer=True)
