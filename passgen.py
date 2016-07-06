@@ -19,7 +19,7 @@
 import argparse
 import math
 import random
-from string import digits, ascii_lowercase, ascii_uppercase, punctuation
+from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 import textwrap
 
 
