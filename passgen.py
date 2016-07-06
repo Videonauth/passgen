@@ -16,6 +16,8 @@
 
 """Module/Script to generate randomized passwords."""
 
+__version__ = "0.0.8"
+
 import argparse
 from collections import Counter
 import math
@@ -128,12 +130,13 @@ def make_parser():
                         help="how often a single character can occur in the password")
     parser.add_argument("-b", "--blacklist", type=str, default="",
                         help="the characters to be excluded from password generation")
-    parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.0.6")
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s "+__version__)
     return parser
 
 if __name__ == "__main__":
     parser = make_parser()
     # Output password
+    password = make_password(sanitize_input(parser.parse_args()))
     print("==== Your password is ... ====")
-    print(make_password(sanitize_input(parser.parse_args())))
+    print(password)
     print("==============================")
