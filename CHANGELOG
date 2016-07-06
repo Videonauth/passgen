@@ -45,7 +45,7 @@
             Add unit tests
             Add information about running unit tests
             Fixed issue #9
-    - 05.07.2016 <--> 0.0.7 (WIP)
+    - 05.07.2016 <--> 0.0.7
             Set buffer to True
             Add more information about running unit tests
             Add spacing
@@ -57,3 +57,6 @@
             Move code for preventing infinite loop from make_password to sanitize…
             Ensure length of character set string is valid
             Add unit tests
+    - 05.07.2016 <--> 0.0.8 (WIP)
+            Added version string to be used.
+            Cleaned output.
