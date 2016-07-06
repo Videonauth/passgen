@@ -63,3 +63,4 @@
             Added header for test_passgen.py
             Added secondary author to passgen.py
             Added docstring for test_passgen.py
+            Removed unused 'import argparse' in test_passgen.py
