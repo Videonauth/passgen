@@ -6,7 +6,7 @@
 #
 ############################################################################
 #
-# Author: edwinksl <>
+# Author: edwinksl <edwinksl@gmail.com>
 # Date: 05.07.2016
 # Purpose:
 #     Testing the argument parser of passgen.py.

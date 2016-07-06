@@ -7,7 +7,7 @@
 ############################################################################
 #
 # Author: Videonauth <videonauth@googlemail.com>
-# Author: edwinksl <>
+# Author: edwinksl <edwinksl@gmail.com>
 # Date: 30.06.2016
 # Purpose:
 #     Generate a randomized password of given length.
