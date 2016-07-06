@@ -31,7 +31,8 @@ def sanitize_input(dictionary):
     """Sanitize the input for the make_password function.
 
     :param dictionary: contains a namespace of the users' or other programs' input
-    :return: a sanitized namespace or stops the program in case of malicious input
+    :return: a dictionary containing entries for sanitized string, length and limit
+             or stops the program in case of malicious input
     """
     try:
         c_flags = Counter(dictionary.flags)
@@ -64,35 +65,35 @@ def sanitize_input(dictionary):
         # Prevent incorrect values for limit
         if not 1 <= dictionary.limit <= dictionary.length:
             raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
+
+        # Ensure limit is sufficiently large for length to prevent infinite loop
+        if dictionary.length > len(char_set) * dictionary.limit:
+            invalid_limit = dictionary.limit
+            dictionary.limit = math.ceil(dictionary.length / len(char_set))
+            print('Limit has been increased from {} to {}!'.format(invalid_limit, dictionary.limit))
+
     except ValueError as error:
         print("An error occurred: {}".format(error))
         raise
     else:
-        return dictionary
+        return {'char_set': char_set, 'length': dictionary.length, 'limit': dictionary.limit}
 
 
 def make_password(dictionary):
     """Make a password of a given length randomizing characters contained in char_set variable.
 
-    :param dictionary: a namespace containing entries for blacklist, flags, length and limit
-    :var dictionary.blacklist: blacklisted characters which are not used for password
-    :var dictionary.flags: a string containing the settings for the character pool
+    :param dictionary: a dictionary containing entries for sanitized string, length and limit
+    :var dictionary.char_set: a sanitized string containing the settings for the character pool
     :var dictionary.length: integer value defining the length of the password
     :var dictionary.limit: integer value defining the maximum occurrences of a single character in the end result
     :return: a string containing the password
     """
-    char_set = ""
-    for flag in dictionary.flags:
-            char_set += char_all[flag]
-    # Prevent infinite loop
-    if dictionary.length > (len(char_set) - len(dictionary.blacklist)) * dictionary.limit:
-        dictionary.limit = math.ceil(dictionary.length / (len(char_set) - len(dictionary.blacklist)))
     # Put the password together
     return_value = []
     password = ""
-    while len(return_value) < dictionary.length:
-        tmp_char = random.choice(char_set)
-        if return_value.count(tmp_char) < dictionary.limit and tmp_char not in dictionary.blacklist:
+    while len(return_value) < dictionary['length']:
+        tmp_char = random.choice(dictionary['char_set'])
+        if return_value.count(tmp_char) < dictionary['limit']:
             return_value.append(tmp_char)
     return password.join(return_value)
 
