@@ -46,3 +46,14 @@
             Add information about running unit tests
             Fixed issue #9
     - 05.07.2016 <--> 0.0.7 (WIP)
+            Set buffer to True
+            Add more information about running unit tests
+            Add spacing
+            Fix formatting
+            Add unit test for valid blacklist
+            Rearrange imports
+            Refactor code using collections.Counter
+            Add more unit tests
+            Move code for preventing infinite loop from make_password to sanitize…
+            Ensure length of character set string is valid
+            Add unit tests
