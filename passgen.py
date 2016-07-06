@@ -57,6 +57,11 @@ def sanitize_input(dictionary):
                 raise ValueError('Character in blacklist is invalid for flags given!')
             char_set = char_set.replace(key, '')  # note that assignment is required because strings are immutable
 
+        # Check that length of char_set is valid
+        # Length of char_set is 0 when all characters in blacklist are the same as that specified by all flags
+        if len(char_set) == 0:
+            raise ValueError('Number of valid characters is zero!')
+
         # Prevent passwords below the length of 8
         if dictionary.length < 8:
             dictionary.length = 8
