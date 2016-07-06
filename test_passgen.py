@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 from passgen import make_parser, sanitize_input
 import unittest
@@ -32,4 +34,4 @@ class PassGenTestCase(unittest.TestCase):
             self.assertIsInstance(dictionary, argparse.Namespace)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(buffer=True)
