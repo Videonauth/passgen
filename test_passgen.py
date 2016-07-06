@@ -11,14 +11,33 @@ class PassGenTestCase(unittest.TestCase):
         self.parse_args = make_parser().parse_args
 
     def test_duplicate_flags(self):
-        for duplicate_flag in ['dd', 'll', 'uu', 'pp', 'ss']:
-            with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError):
+            for duplicate_flag in ['dd', 'll', 'uu', 'pp', 'ss']:
                 sanitize_input(self.parse_args(['-f', duplicate_flag]))
 
     def test_no_valid_flags(self):
-        for invalid_flag in ['a', 'b', 'c']:
-            with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError):
+            for invalid_flag in ['a', 'b', 'c']:
                 sanitize_input(self.parse_args(['-f', invalid_flag]))
+
+    def test_mixed_valid_invalid_flags(self):
+        with self.assertRaises(ValueError):
+            for mixed_flags in ['dq']:
+                sanitize_input(self.parse_args(['-f', mixed_flags]))
+
+    def test_duplicate_characters_blacklist(self):
+        with self.assertRaises(ValueError):
+            for duplicate_characters in ['aa', 'bb', 'cc']:
+                sanitize_input(self.parse_args(['-f', 'l', '-b', duplicate_characters]))
+
+    def test_invalid_character_blacklist(self):
+        with self.assertRaises(ValueError):
+            sanitize_input(self.parse_args(['-f', 'd', '-b', 'a']))
+            sanitize_input(self.parse_args(['-f', 'l', '-b', '1']))
+
+    def test_length_lower_bound(self):
+        dictionary = sanitize_input(self.parse_args(['-e', '7']))
+        self.assertEqual(dictionary.length, 8)
 
     def test_limit_lower_bound(self):
         with self.assertRaises(ValueError):
