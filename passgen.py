@@ -17,14 +17,14 @@
 
 """Module/Script to generate randomized passwords."""
 
-__version__ = "0.0.8"
-
 import argparse
 from collections import Counter
 import math
 import random
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 import textwrap
+
+__version__ = "0.0.8"
 
 # Define the characters which are valid for making a password
 char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
