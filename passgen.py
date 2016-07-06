@@ -17,74 +17,88 @@
 """Module/Script to generate randomized passwords."""
 
 import argparse
+from collections import Counter
 import math
 import random
-from string import digits, ascii_lowercase, ascii_uppercase, punctuation
+from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 import textwrap
+
+# Define the characters which are valid for making a password
+char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
 
 
 def sanitize_input(dictionary):
     """Sanitize the input for the make_password function.
 
     :param dictionary: contains a namespace of the users' or other programs' input
-    :return: a sanitized namespace or stops the program in case of malicious input
+    :return: a dictionary containing entries for sanitized string, length and limit
+             or stops the program in case of malicious input
     """
     try:
-        # Prevent duplicate flags
-        for flag in dictionary.flags:
-            if dictionary.flags.count(flag) > 1:
+        c_flags = Counter(dictionary.flags)
+        c_blacklist = Counter(dictionary.blacklist)
+        char_set = ''
+
+        for key, value in c_flags.items():
+            # Prevent duplicate flags
+            if value > 1:
                 raise ValueError("Flags can occur only once in the statement!")
-        # Prevent program from running with no valid flags given
-        count = 5
-        for flag in ["d", "l", "u", "p", "s"]:
-            if flag not in dictionary.flags:
-                count -= 1
-        if count < 1:
-            raise ValueError("No valid flags given!")
-        # Throw away incorrect flags
-        tmp_flag = ""
-        for flag in dictionary.flags:
-            if flag in ["d", "l", "u", "p", "s"]:
-                tmp_flag += flag
-        dictionary.flags = tmp_flag
-        # Prevent incorrect values for limit
-        if not 1 <= dictionary.limit <= dictionary.length:
-            raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
+            # Prevent program from running with no valid flags or a mix of valid and invalid flags
+            if key not in char_all.keys():
+                raise ValueError("Invalid flags given!")
+            char_set += char_all[key]
+
+        for key, value in c_blacklist.items():
+            # Prevent duplicate characters in blacklist
+            if value > 1:
+                raise ValueError('Duplicate characters in blacklist!')
+            # Raise ValueError when character in blacklist does not exist in any of the valid flags
+            if key not in char_set:
+                raise ValueError('Character in blacklist is invalid for flags given!')
+            char_set = char_set.replace(key, '')  # note that assignment is required because strings are immutable
+
+        # Check that length of char_set is valid
+        # Length of char_set is 0 when all characters in blacklist are the same as that specified by all flags
+        if len(char_set) == 0:
+            raise ValueError('Number of valid characters is zero!')
+
         # Prevent passwords below the length of 8
         if dictionary.length < 8:
             dictionary.length = 8
-            print("For your own safety, the password has been set to be at 8 characters long!")
+            print("For your own safety, the password has been set to be 8 characters long!")
+
+        # Prevent incorrect values for limit
+        if not 1 <= dictionary.limit <= dictionary.length:
+            raise ValueError("The limit has to have at least a value of 1 and makes no sense if longer than length!")
+
+        # Ensure limit is sufficiently large for length to prevent infinite loop
+        if dictionary.length > len(char_set) * dictionary.limit:
+            invalid_limit = dictionary.limit
+            dictionary.limit = math.ceil(dictionary.length / len(char_set))
+            print('Limit has been increased from {} to {}!'.format(invalid_limit, dictionary.limit))
+
     except ValueError as error:
         print("An error occurred: {}".format(error))
         raise
     else:
-        return dictionary
+        return {'char_set': char_set, 'length': dictionary.length, 'limit': dictionary.limit}
 
 
 def make_password(dictionary):
     """Make a password of a given length randomizing characters contained in char_set variable.
 
-    :param dictionary: a namespace containing entries for blacklist, flags, length and limit
-    :var dictionary.blacklist: blacklisted characters which are not used for password
-    :var dictionary.flags: a string containing the settings for the character pool
+    :param dictionary: a dictionary containing entries for sanitized string, length and limit
+    :var dictionary.char_set: a sanitized string containing the settings for the character pool
     :var dictionary.length: integer value defining the length of the password
     :var dictionary.limit: integer value defining the maximum occurrences of a single character in the end result
     :return: a string containing the password
     """
-    # Define the characters which are valid for making a password
-    char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
-    char_set = ""
-    for flag in dictionary.flags:
-            char_set += char_all[flag]
-    # Prevent infinite loop
-    if dictionary.length > (len(char_set) - len(dictionary.blacklist)) * dictionary.limit:
-        dictionary.limit = math.ceil(dictionary.length / (len(char_set) - len(dictionary.blacklist)))
     # Put the password together
     return_value = []
     password = ""
-    while len(return_value) < dictionary.length:
-        tmp_char = random.choice(char_set)
-        if return_value.count(tmp_char) < dictionary.limit and tmp_char not in dictionary.blacklist:
+    while len(return_value) < dictionary['length']:
+        tmp_char = random.choice(dictionary['char_set'])
+        if return_value.count(tmp_char) < dictionary['limit']:
             return_value.append(tmp_char)
     return password.join(return_value)
 
