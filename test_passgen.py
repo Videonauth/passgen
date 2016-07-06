@@ -8,7 +8,6 @@ class PassGenTestCase(unittest.TestCase):
     def setUp(self):
         self.parse_args = make_parser().parse_args
 
-
     def test_duplicate_flags(self):
         for duplicate_flag in ['dd', 'll', 'uu', 'pp', 'ss']:
             with self.assertRaises(ValueError):
