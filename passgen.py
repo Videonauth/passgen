@@ -35,28 +35,40 @@ def check_password(password):
     # test for proper length
     if len(password) < 10:
         score -= (10 - len(password)) * 5
+        print("Is not 15 characters or more: Length: {} Result: {}".format((10 - len(password)),
+                                                                         ((10 - len(password)) * 5)))
     else:
         score += (len(password) - 10) * 5
+        print("Is not 15 characters or more: Length: {} Result: {}".format((len(password) - 10),
+                                                                         ((len(password) - 10) * 5)))
     # test for lowercase
     if any(ascii_lowercase) in password:
         score += 20
+        print("Contains lowercase letters: Result: +20")
     else:
         score -= 20
+        print("Contains no lowercase letters: Result: -20")
     # test for uppercase
     if any(ascii_uppercase) in password:
         score += 20
+        print("Contains uppercase letters: Result: +20")
     else:
         score -= 20
+        print("Contains no uppercase letters: Result: -20")
     # test for punctuation
     if any(punctuation) in password:
         score += 20
+        print("Contains punctuation letters: Result: +20")
     else:
         score -= 20
+        print("Contains no punctuation letters: Result: -20")
     # test for digits
     if any(digits) in password:
         score += 20
+        print("Contains numerical digits: Result: +20")
     else:
         score -= 20
+        print("Contains no numerical digits: Result: -20")
     # test for special characters
         # TODO: implement it
     # test for identical characters 3 or more identical in sequence

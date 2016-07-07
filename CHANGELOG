@@ -65,3 +65,5 @@
             Added docstring for test_passgen.py
             Removed unused 'import argparse' in test_passgen.py
             Added author email address
+            First draft check_password (issue #15)
+            Added output for already drafted cases (issue #15)
