@@ -31,6 +31,11 @@ char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctu
 
 
 def check_password(password):
+    """Checks the password for its strength.
+
+    :param password: a string containing the password
+    :return: an integer containing the final calculated score (temporary)
+    """
     score = 0
     # test for proper length
     if len(password) < 10:
