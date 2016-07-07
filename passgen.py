@@ -30,6 +30,46 @@ __version__ = "0.0.8"
 char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
 
 
+def check_password(password):
+    score = 0
+    # test for proper length
+    if len(password) < 10:
+        score -= (10 - len(password)) * 5
+    else:
+        score += (len(password) - 10) * 5
+    # test for lowercase
+    if any(ascii_lowercase) in password:
+        score += 20
+    else:
+        score -= 20
+    # test for uppercase
+    if any(ascii_uppercase) in password:
+        score += 20
+    else:
+        score -= 20
+    # test for punctuation
+    if any(punctuation) in password:
+        score += 20
+    else:
+        score -= 20
+    # test for digits
+    if any(digits) in password:
+        score += 20
+    else:
+        score -= 20
+    # test for special characters
+        # TODO: implement it
+    # test for identical characters 3 or more identical in sequence
+        # TODO: implement it
+    # test for character chains keyboard 3 or more identical in sequence
+        # TODO: implement it
+    # test for 'abc' or digit rows 3 or more in sequence
+        # TODO: implement it
+    # test for word list vulnerability
+        # TODO: implement it
+    return score
+
+
 def sanitize_input(dictionary):
     """Sanitize the input for the make_password function.
 
