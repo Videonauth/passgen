@@ -144,7 +144,7 @@ def check_password(password, dictionary):
     # test for proper length
     if len(password) < 10:
         score -= (10 - len(password)) * 5
-        print("Is not 15 characters or more: Length: {} Result: {}".format((10 - len(password)),
+        print("Is not 15 characters or more: Length: {} Result: {}".format(-(10 - len(password)),
                                                                            -((10 - len(password)) * 5)))
     else:
         score += (len(password) - 10) * 5
