@@ -210,9 +210,20 @@ def check_password(password, dictionary):
         score -= count * 5
         print("Contains 'abc' or digit sequences: Result: {}".format(-(count * 5)))
     else:
-        print("Contains no 'abc' or digit sequences: Result: No change in Score")
-    # test for word list vulnerability
-        # TODO: implement it
+        print("Contains no 'abc' or digit sequences: Result: No change in score")
+    # test for word list vulnerability (Needs rework  for supporting more than one list)
+    count = 0
+    with open('lists/lang.en.wl', 'r') as file:
+        en_list = file.readlines()
+    file.close()
+    for word in en_list:
+        if word in password:
+            count += 1
+    if count > 0:
+        score -= count * 5
+        print("Contains words from english word-list: Result: {}".format(-(count * 5)))
+    else:
+        print("Contains no words from english word-list: Result: No change in score")
     return score
 
 
