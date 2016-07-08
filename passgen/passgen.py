@@ -134,9 +134,11 @@ def make_parser():
     parser.add_argument("-v", "--version", action="version", version="%(prog)s "+__version__)
     return parser
 
+
 def check_password(password, dictionary):
     """Checks the password for its strength.
 
+    :param dictionary: a dictionary containing the data used to generate the password
     :param password: a string containing the password
     :return: an integer containing the final calculated score (temporary)
     """
@@ -197,7 +199,7 @@ def check_password(password, dictionary):
     # test for character chains keyboard 3 or more identical in sequence
         # TODO: implement it
     # test for 'abc' or digit rows 3 or more in sequence
-    with open('abc.wl', 'r') as file:
+    with open('../lists/abc.wl', 'r') as file:
         abc_list = file.readlines()
     file.close()
     count = 0
