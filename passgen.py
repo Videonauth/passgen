@@ -153,28 +153,28 @@ def check_password(password, dictionary):
     # test for lowercase
     if any(char in ascii_lowercase for char in password):
         score += 20
-        print("Contains lowercase letters: Result: +20")
+        print("Contains lowercase letters: Result: 20")
     else:
         score -= 20
         print("Contains no lowercase letters: Result: -20")
     # test for uppercase
     if any(char in ascii_uppercase for char in password):
         score += 20
-        print("Contains uppercase letters: Result: +20")
+        print("Contains uppercase letters: Result: 20")
     else:
         score -= 20
         print("Contains no uppercase letters: Result: -20")
     # test for punctuation
     if any(char in punctuation for char in password):
         score += 20
-        print("Contains punctuation letters: Result: +20")
+        print("Contains punctuation letters: Result: 20")
     else:
         score -= 20
         print("Contains no punctuation letters: Result: -20")
     # test for digits
     if any(char in digits for char in password):
         score += 20
-        print("Contains numerical digits: Result: +20")
+        print("Contains numerical digits: Result: 20")
     else:
         score -= 20
         print("Contains no numerical digits: Result: -20")
