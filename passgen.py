@@ -30,63 +30,6 @@ __version__ = "0.0.8"
 char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
 
 
-def check_password(password):
-    """Checks the password for its strength.
-
-    :param password: a string containing the password
-    :return: an integer containing the final calculated score (temporary)
-    """
-    score = 0
-    # test for proper length
-    if len(password) < 10:
-        score -= (10 - len(password)) * 5
-        print("Is not 15 characters or more: Length: {} Result: {}".format((10 - len(password)),
-                                                                         ((10 - len(password)) * 5)))
-    else:
-        score += (len(password) - 10) * 5
-        print("Is not 15 characters or more: Length: {} Result: {}".format((len(password) - 10),
-                                                                         ((len(password) - 10) * 5)))
-    # test for lowercase
-    if any(ascii_lowercase) in password:
-        score += 20
-        print("Contains lowercase letters: Result: +20")
-    else:
-        score -= 20
-        print("Contains no lowercase letters: Result: -20")
-    # test for uppercase
-    if any(ascii_uppercase) in password:
-        score += 20
-        print("Contains uppercase letters: Result: +20")
-    else:
-        score -= 20
-        print("Contains no uppercase letters: Result: -20")
-    # test for punctuation
-    if any(punctuation) in password:
-        score += 20
-        print("Contains punctuation letters: Result: +20")
-    else:
-        score -= 20
-        print("Contains no punctuation letters: Result: -20")
-    # test for digits
-    if any(digits) in password:
-        score += 20
-        print("Contains numerical digits: Result: +20")
-    else:
-        score -= 20
-        print("Contains no numerical digits: Result: -20")
-    # test for special characters
-        # TODO: implement it
-    # test for identical characters 3 or more identical in sequence
-        # TODO: implement it
-    # test for character chains keyboard 3 or more identical in sequence
-        # TODO: implement it
-    # test for 'abc' or digit rows 3 or more in sequence
-        # TODO: implement it
-    # test for word list vulnerability
-        # TODO: implement it
-    return score
-
-
 def sanitize_input(dictionary):
     """Sanitize the input for the make_password function.
 
@@ -191,6 +134,75 @@ def make_parser():
     parser.add_argument("-v", "--version", action="version", version="%(prog)s "+__version__)
     return parser
 
+def check_password(password, dictionary):
+    """Checks the password for its strength.
+
+    :param password: a string containing the password
+    :return: an integer containing the final calculated score (temporary)
+    """
+    score = 0
+    # test for proper length
+    if len(password) < 10:
+        score -= (10 - len(password)) * 5
+        print("Is not 15 characters or more: Length: {} Result: {}".format((10 - len(password)),
+                                                                           -((10 - len(password)) * 5)))
+    else:
+        score += (len(password) - 10) * 5
+        print("Is not 15 characters or more: Length: {} Result: {}".format((len(password) - 10),
+                                                                           ((len(password) - 10) * 5)))
+    # test for lowercase
+    if any(char in ascii_lowercase for char in password):
+        score += 20
+        print("Contains lowercase letters: Result: +20")
+    else:
+        score -= 20
+        print("Contains no lowercase letters: Result: -20")
+    # test for uppercase
+    if any(char in ascii_uppercase for char in password):
+        score += 20
+        print("Contains uppercase letters: Result: +20")
+    else:
+        score -= 20
+        print("Contains no uppercase letters: Result: -20")
+    # test for punctuation
+    if any(char in punctuation for char in password):
+        score += 20
+        print("Contains punctuation letters: Result: +20")
+    else:
+        score -= 20
+        print("Contains no punctuation letters: Result: -20")
+    # test for digits
+    if any(char in digits for char in password):
+        score += 20
+        print("Contains numerical digits: Result: +20")
+    else:
+        score -= 20
+        print("Contains no numerical digits: Result: -20")
+    # test for special characters
+        # left out for now
+    # test for identical characters 3 or more identical in sequence
+    count = 0
+    for i in dictionary['char_set']:
+        if i in password and dictionary['limit'] > 1:
+            if password.count(i) > 2:
+                for j in range(3, dictionary['limit'] + 1):
+                    if i * j in password:
+                        count += 1
+    if count > 0:
+        score -= count * 5
+        print("Contains characters in sequence: Result: {}".format(-(count * 5)))
+    else:
+        score += dictionary['limit'] * 5
+        print("Contains no characters in sequence: Result: {}".format((dictionary['limit'] * 5)))
+    # test for character chains keyboard 3 or more identical in sequence
+        # TODO: implement it
+    # test for 'abc' or digit rows 3 or more in sequence
+        # TODO: implement it
+    # test for word list vulnerability
+        # TODO: implement it
+    return score
+
+
 if __name__ == "__main__":
     options = make_parser()
     # Output password
@@ -198,3 +210,4 @@ if __name__ == "__main__":
     print("==== Your password is ... ====")
     print(passwd)
     print("==============================")
+    print(check_password(passwd, sanitize_input(options.parse_args())))
