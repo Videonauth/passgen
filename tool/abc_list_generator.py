@@ -19,6 +19,7 @@ from string import ascii_lowercase, ascii_uppercase, digits
 natural = digits[1:] + '0'
 
 
+# next line might error out if destination file does not exist
 with open('../lists/abc.wl', 'r+') as file:
     for a in range(3, len(ascii_lowercase) + 1):
         for b in range(len(ascii_lowercase)):
