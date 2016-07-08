@@ -197,7 +197,18 @@ def check_password(password, dictionary):
     # test for character chains keyboard 3 or more identical in sequence
         # TODO: implement it
     # test for 'abc' or digit rows 3 or more in sequence
-        # TODO: implement it
+    with open('abc.wl', 'r') as file:
+        abc_list = file.readlines()
+    file.close()
+    count = 0
+    for word in abc_list:
+        if word in password:
+            count += 1
+    if count > 0:
+        score -= count * 5
+        print("Contains 'abc' or digit sequences: Result: {}".format(-(count * 5)))
+    else:
+        print("Contains no 'abc' or digit sequences: Result: No change in Score")
     # test for word list vulnerability
         # TODO: implement it
     return score

@@ -70,3 +70,4 @@
             Added search for character sequence (issue #15)
             Created tool-script for generating abc.wl (issue #15)
             Created abc.wl file (issue #15)
+            Implemented 'abc' list test (issue #15)
