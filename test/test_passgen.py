@@ -16,8 +16,9 @@
 
 """Test cases for passgen.py"""
 
-from passgen import make_parser, sanitize_input
 import unittest
+
+from passgen import make_parser, sanitize_input
 
 
 class PassGenTestCase(unittest.TestCase):

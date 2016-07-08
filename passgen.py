@@ -199,7 +199,7 @@ def check_password(password, dictionary):
     # test for character chains keyboard 3 or more identical in sequence
         # TODO: implement it
     # test for 'abc' or digit rows 3 or more in sequence
-    with open('../lists/abc.wl', 'r') as file:
+    with open('lists/abc.wl', 'r') as file:
         abc_list = file.readlines()
     file.close()
     count = 0
