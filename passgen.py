@@ -150,7 +150,7 @@ def check_password(password, dictionary):
                                                                            -((10 - len(password)) * 5)))
     else:
         score += (len(password) - 10) * 5
-        print("Is not 15 characters or more: Length: {} Result: {}".format((len(password) - 10),
+        print("Is 15 characters or more: Length: {} Result: {}".format((len(password) - 10),
                                                                            ((len(password) - 10) * 5)))
     # test for lowercase
     if any(char in ascii_lowercase for char in password):
