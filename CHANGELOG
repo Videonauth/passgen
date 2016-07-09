@@ -80,3 +80,4 @@
             Fixed typo in output string (issue #15)
     - 09.07.2016 <--> 0.0.9 (WIP)
             Released 0.0.8 (#23)
+            Changed to MIT license
