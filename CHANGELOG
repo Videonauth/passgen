@@ -57,7 +57,7 @@
             Move code for preventing infinite loop from make_password to sanitize…
             Ensure length of character set string is valid
             Add unit tests
-    - 06.07.2016 <--> 0.0.8 (WIP)
+    - 06.07.2016 <--> 0.0.8
             Added version string to be used.
             Cleaned output.
             Added header for test_passgen.py
@@ -78,3 +78,4 @@
             Created keyboard.wl file (issue #15)
             Implemented keyboard list test (issue #15)
             Fixed typo in output string (issue #15)
+    - 09.07.2016 <--> 0.0.9 (WIP)
