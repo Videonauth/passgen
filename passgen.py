@@ -197,7 +197,18 @@ def check_password(password, dictionary):
         score += dictionary['limit'] * 5
         print("Contains no characters in sequence: Result: {}".format((dictionary['limit'] * 5)))
     # test for character chains keyboard 3 or more identical in sequence
-        # TODO: implement it
+    with open('lists/keyboard.wl', 'r') as file:
+        abc_list = file.readlines()
+    file.close()
+    count = 0
+    for word in abc_list:
+        if word in password:
+            count += 1
+    if count > 0:
+        score -= count * 5
+        print("Contains keyboard sequences: Result: {}".format(-(count * 5)))
+    else:
+        print("Contains no keyboard sequences: Result: No change in score")
     # test for 'abc' or digit rows 3 or more in sequence
     with open('lists/abc.wl', 'r') as file:
         abc_list = file.readlines()

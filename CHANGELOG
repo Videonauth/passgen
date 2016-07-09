@@ -74,3 +74,6 @@
             Added english word-list (issue #15)
             Added word-list test (issue #15)
             Corrected typo in min length test (issue #15)
+            Created tool-script for generating keyboard.wl (issue #15)
+            Created keyboard.wl file (issue #15)
+            Implemented keyboard list test (issue #15)
