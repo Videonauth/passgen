@@ -24,7 +24,7 @@ import random
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 import textwrap
 
-__version__ = "0.0.9"
+__version__ = "0.1.0"
 
 # Define the characters which are valid for making a password
 char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
