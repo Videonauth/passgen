@@ -152,6 +152,7 @@ def check_password(password, dictionary):
         score += (len(password) - 10) * 5
         print("Is 10 characters or more: Length: {} Result: {}".format((len(password) - 10),
                                                                            ((len(password) - 10) * 5)))
+
     # test for lowercase
     if any(char in ascii_lowercase for char in password):
         score += 20
@@ -159,6 +160,7 @@ def check_password(password, dictionary):
     else:
         score -= 20
         print("Contains no lowercase letters: Result: -20")
+
     # test for uppercase
     if any(char in ascii_uppercase for char in password):
         score += 20
@@ -166,6 +168,7 @@ def check_password(password, dictionary):
     else:
         score -= 20
         print("Contains no uppercase letters: Result: -20")
+
     # test for punctuation
     if any(char in punctuation for char in password):
         score += 20
@@ -173,6 +176,7 @@ def check_password(password, dictionary):
     else:
         score -= 20
         print("Contains no punctuation letters: Result: -20")
+
     # test for digits
     if any(char in digits for char in password):
         score += 20
@@ -180,8 +184,7 @@ def check_password(password, dictionary):
     else:
         score -= 20
         print("Contains no numerical digits: Result: -20")
-    # test for special characters
-        # left out for now
+
     # test for identical characters 3 or more identical in sequence
     count = 0
     for i in dictionary['char_set']:
@@ -196,6 +199,7 @@ def check_password(password, dictionary):
     else:
         score += dictionary['limit'] * 5
         print("Contains no characters in sequence: Result: {}".format((dictionary['limit'] * 5)))
+
     # test for character chains keyboard 3 or more identical in sequence
     with open('lists/keyboard.wl', 'r') as file:
         abc_list = file.readlines()
@@ -209,6 +213,7 @@ def check_password(password, dictionary):
         print("Contains keyboard sequences: Result: {}".format(-(count * 5)))
     else:
         print("Contains no keyboard sequences: Result: No change in score")
+
     # test for 'abc' or digit rows 3 or more in sequence
     with open('lists/abc.wl', 'r') as file:
         abc_list = file.readlines()
@@ -222,6 +227,7 @@ def check_password(password, dictionary):
         print("Contains 'abc' or digit sequences: Result: {}".format(-(count * 5)))
     else:
         print("Contains no 'abc' or digit sequences: Result: No change in score")
+
     # test for word list vulnerability (Needs rework  for supporting more than one list)
     count = 0
     with open('lists/lang.en.wl', 'r') as file:
@@ -235,6 +241,7 @@ def check_password(password, dictionary):
         print("Contains words from english word-list: Result: {}".format(-(count * 5)))
     else:
         print("Contains no words from english word-list: Result: No change in score")
+
     return score
 
 
