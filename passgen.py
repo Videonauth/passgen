@@ -254,3 +254,4 @@ if __name__ == "__main__":
     print(passwd)
     print("==============================")
     print(check_password(passwd, sanitize_input(options.parse_args())))
+    pass
