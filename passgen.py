@@ -151,7 +151,7 @@ def check_password(password, dictionary):
     else:
         score += (len(password) - 10) * 5
         print("Is 10 characters or more: Length: {} Result: {}".format((len(password) - 10),
-                                                                           ((len(password) - 10) * 5)))
+                                                                       ((len(password) - 10) * 5)))
 
     # test for lowercase
     if any(char in ascii_lowercase for char in password):
@@ -201,7 +201,7 @@ def check_password(password, dictionary):
         print("Contains no characters in sequence: Result: {}".format((dictionary['limit'] * 5)))
 
     # test for character chains keyboard 3 or more identical in sequence
-    with open('lists/keyboard.wl', 'r') as file:
+    with open('lists/keyboard.wl') as file:
         abc_list = file.readlines()
     file.close()
     count = 0
@@ -215,7 +215,7 @@ def check_password(password, dictionary):
         print("Contains no keyboard sequences: Result: No change in score")
 
     # test for 'abc' or digit rows 3 or more in sequence
-    with open('lists/abc.wl', 'r') as file:
+    with open('lists/abc.wl') as file:
         abc_list = file.readlines()
     file.close()
     count = 0
@@ -230,7 +230,7 @@ def check_password(password, dictionary):
 
     # test for word list vulnerability (Needs rework  for supporting more than one list)
     count = 0
-    with open('lists/lang.en.wl', 'r') as file:
+    with open('lists/lang.en.wl') as file:
         en_list = file.readlines()
     file.close()
     for word in en_list:
