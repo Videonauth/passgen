@@ -23,8 +23,13 @@ import math
 import random
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 import textwrap
+import os
 
+# Version string
 __version__ = "0.1.0"
+
+# define the directory where the script resides at
+script_directory = os.path.dirname(os.path.realpath(__file__))
 
 # Define the characters which are valid for making a password
 char_all = {"d": digits, "l": ascii_lowercase, "u": ascii_uppercase, "p": punctuation, "s": " "}
@@ -201,7 +206,7 @@ def check_password(password, dictionary):
         print("Contains no characters in sequence: Result: {}".format((dictionary['limit'] * 5)))
 
     # test for character chains keyboard 3 or more identical in sequence
-    with open('lists/keyboard.wl') as file:
+    with open('{}/lists/keyboard.wl'.format(script_directory)) as file:
         abc_list = file.readlines()
     file.close()
     count = 0
@@ -215,7 +220,7 @@ def check_password(password, dictionary):
         print("Contains no keyboard sequences: Result: No change in score")
 
     # test for 'abc' or digit rows 3 or more in sequence
-    with open('lists/abc.wl') as file:
+    with open('{}/lists/abc.wl'.format(script_directory)) as file:
         abc_list = file.readlines()
     file.close()
     count = 0
@@ -230,7 +235,7 @@ def check_password(password, dictionary):
 
     # test for word list vulnerability (Needs rework  for supporting more than one list)
     count = 0
-    with open('lists/lang.en.wl') as file:
+    with open('{}/lists/lang.en.wl'.format(script_directory)) as file:
         en_list = file.readlines()
     file.close()
     for word in en_list:
